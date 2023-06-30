@@ -1,12 +1,7 @@
-public class Catalog {
-    
-}
-
 import java.util.*;
-/**
- * noutbooks
- */
-public class Notebook{
+
+public class Catalog {    
+
     private String name; //название
     private Integer ram; //объем оперативной памяти
     private Integer hd; //объем жесткого диска
@@ -46,7 +41,7 @@ public class Notebook{
     }
 
     // конструктор
-    public Notebook (String name, Integer ram, Integer hd, String os, String color){
+    public Catalog (String name, Integer ram, Integer hd, String os, String color){
         this.name = name;
         this.ram = ram;
         this.hd = hd;

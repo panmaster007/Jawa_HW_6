@@ -5,53 +5,16 @@ import java.util.*;
 // Написать метод, который будет запрашивать у пользователя критерий фильтрации и выведет ноутбуки,
 // отвечающие фильтру.
 
-// NoteBook notebook1 = new NoteBook
-// NoteBook notebook2 = new NoteBook
-// NoteBook notebook3 = new NoteBook
-// NoteBook notebook4 = new NoteBook
-// NoteBook notebook5 = new NoteBook
-
-// Например: “Введите цифру, соответствующую необходимому критерию:
-// 1 - ОЗУ
-// 2 - Объем ЖД
-// 3 - Операционная система
-// 4 - Цвет
-
-// Далее нужно запросить минимальные значения для указанных критериев - сохранить параметры 
-// фильтрации можно также в Map.
-
-// Отфильтровать ноутбуки их первоначального множества и вывести проходящие по условиям.
-
-// Класс сделать в отдельном файле
-
-// приветствие
-// Выбор параметра
-// выбор конкретнее
-// вывод подходящих
-
-public class Task_01 {
-    // Программа реализована на цикле внесения параметров.
-    // Внесение одного параметра отбора возвращает программу в меню выбора для внесения других фильтров
-    // Переход к фильтрации по критериям - по клавише ввода в том же меню
-
-    // Алгоритм работает следующим образом:
-    // - составляется Map-фильтр на основании внесенных пользователем требований;
-    // - далее программа перебирает список ноутбуков, находя в экземплярах класса поля,
-    //         упомянутые в фильтре, при несоответствии требований в списке-фильтре и списке 
-    //         экземпляров имя экземпляра заменяется пустой строкой;
-    // - результирующий список ноутбуков заполняется из начального списка, пропуская экземпляры
-    //         с пустой строкой вместо названия.
-
-    // ------- основная программа --------
+public class Task1 {
+ 
     public static void main(String[] args) {
-        Map<String, String> crete_map; // список критериев для отбора
+        Map<String, String> crete_map;
         System.out.println();
-        Notebook nout_1 = new Notebook("Huawei MateBook D 14 2021 NbD-WDH9", 8, 1024, "Windows 11", "серебристый");
-        Notebook nout_2 = new Notebook("Xiaomi RedmiBook 15 (JYU4525RU)", 8, 512, "Windows 11 Home", "синий");
-        Notebook nout_3 = new Notebook("Asus Laptop 15 X515JA-BQ2588", 16, 256, "DOS", "серебристый");
-        Notebook nout_4 = new Notebook("Xiaomi RedmiBook 15 (JYU4532RU)", 8, 512, "Windows 11 Home", "синий");
-        Notebook nout_5 = new Notebook("Lenovo IdeaPad 3 15IML05 (81WB0072RE)", 4, 1024, "Windows 11 Home", "черный");
-        // список ноутбуков в наличии
+        Catalog nout_1 = new Catalog("Asus MateBook 2021", 8, 1024, "Windows 11", "серебристый");
+        Catalog nout_2 = new Catalog("Xiaomi SuperBook 13", 8, 512, "Windows 11 Home", "синий");
+        Catalog nout_3 = new Catalog("Huawei Laptop 16", 16, 256, "DOS", "серебристый");
+        Catalog nout_4 = new Catalog("Xiaomi RedmiBook 15", 8, 512, "Windows 11 Home", "синий");
+        Catalog nout_5 = new Catalog("Apple Makbook Pro", 4, 1024, "DOS", "черный");
         ArrayList noutList = new ArrayList<>();
         noutList.add(nout_1);
         noutList.add(nout_2);
@@ -64,20 +27,12 @@ public class Task_01 {
             System.out.println(nout);
         }
         System.out.println();
-
-        // ---- вызов меню фильтрации параметров --------
         crete_map = FindPar();
-        // ---- вызов метода отсева ноутбуков, не соответствующих фильтрам
         FindList(crete_map, noutList);
-
     }
-
-    // ----- метод отбора ноутбуков по параметрам -------
-    static void FindList(Map<String, String> crete_map, ArrayList<Notebook> n_list) {
-        ArrayList<Notebook> finalRes = new ArrayList<>(); // инициализация результирующего списка
+    static void FindList(Map<String, String> crete_map, ArrayList<Catalog> n_list) {
+        ArrayList<Catalog> finalRes = new ArrayList<>();
         System.out.println();
-        // поиск соответствия по параметрам фильтров
-        // при несоответствии параметра название ноутбука заменяется на пустую строку
         for (var nout : n_list) {
             if ((crete_map.containsKey("ram")) &&
                     (nout.getRam() < Integer.parseInt(crete_map.get("ram")))) {
@@ -98,7 +53,6 @@ public class Task_01 {
             }
 
         }
-        // внесение ноутбуков с непустыми названиями в результирующий список
         for (var i : n_list) {
             if (!i.getName().equals("")) {
                 finalRes.add(i);
@@ -114,12 +68,10 @@ public class Task_01 {
             }
             System.out.println();
         } else {
-            System.out.println("Соответствий выбранным параметрам не найдено");
+            System.out.println("Согласно выбранным параметрам ничего не найдено");
         }
 
     }
-
-    // ----- метод создания списка критериев отбора -----
     static Map<String, String> FindPar() {
         String color = "";
         String choice = "";
@@ -127,16 +79,16 @@ public class Task_01 {
 
         Boolean getOut = false;
 
-        Map<String, String> str = new HashMap<>(); // список фильтров
+        Map<String, String> str = new HashMap<>(); 
         Scanner scan = new Scanner(System.in);
         while (!getOut) {
             System.out.println();
-            System.out.println("Введите цифру, соответствующую необходимому критерию: ");
+            System.out.println("Введите цифру, соответствующую необходимой характеристике: ");
             System.out.println("1 - ОЗУ");
             System.out.println("2 - Объем ЖД");
             System.out.println("3 - Операционная система");
             System.out.println("4 - Цвет");
-            System.out.println("Enter - вывод полученных результатов");
+            System.out.println("Enter - вывод поиска");
 
             choice = scan.nextLine();
             switch (choice) {
@@ -227,7 +179,7 @@ public class Task_01 {
                     break;
                 }
                 default: {
-                    System.out.println("Что-то тут не так, попробуйте еще раз.");
+                    System.out.println("Ошибка, попробуйте еще раз.");
                 }
             }
         }

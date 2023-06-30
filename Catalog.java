@@ -2,13 +2,12 @@ import java.util.*;
 
 public class Catalog {    
 
-    private String name; //название
-    private Integer ram; //объем оперативной памяти
-    private Integer hd; //объем жесткого диска
-    private String os; // операционная система
-    private String color; //цвет
+    private String name; 
+    private Integer ram; 
+    private Integer hd; 
+    private String os; 
+    private String color; 
 
-    //сеттеры-геттеры
     public void setName(String name) {
         this.name = name;
     }
@@ -40,7 +39,6 @@ public class Catalog {
         return color;
     }
 
-    // конструктор
     public Catalog (String name, Integer ram, Integer hd, String os, String color){
         this.name = name;
         this.ram = ram;
